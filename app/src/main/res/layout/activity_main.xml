@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/default_background_image"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="264dp"
-        android:layout_height="80dp"
+        android:layout_width="269dip"
+        android:layout_height="108dip"
         android:text="Take a Pic"
         app:layout_constraintBottom_toTopOf="@+id/button9"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,8 +21,8 @@
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="264dp"
-        android:layout_height="80dp"
+        android:layout_width="269dip"
+        android:layout_height="108dip"
         android:text="Picture Preview"
         app:layout_constraintBottom_toTopOf="@+id/button8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,8 +32,8 @@
 
     <Button
         android:id="@+id/button8"
-        android:layout_width="264dp"
-        android:layout_height="80dp"
+        android:layout_width="269dip"
+        android:layout_height="108dip"
         android:text="Map"
         app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,8 +43,8 @@
 
     <Button
         android:id="@+id/button9"
-        android:layout_width="264dp"
-        android:layout_height="80dp"
+        android:layout_width="269dip"
+        android:layout_height="108dip"
         android:text="Map History"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
