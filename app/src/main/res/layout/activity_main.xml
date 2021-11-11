@@ -8,15 +8,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Needs to be fixed.
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaletype="centerCrop"
         android:src="@drawable/background_3"
         tools:ignore="MissingConstraints" />
+         -->
 
     <Button
         android:id="@+id/button6"
+        android:background="@drawable/gradient"
         android:layout_width="269dip"
         android:layout_height="108dip"
         android:text="Take a Pic"
