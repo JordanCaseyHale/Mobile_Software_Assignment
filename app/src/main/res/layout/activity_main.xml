@@ -8,14 +8,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Needs to be fixed.
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaletype="centerCrop"
+        android:scaleType="centerCrop"
         android:src="@drawable/background_3"
         tools:ignore="MissingConstraints" />
-         -->
+
 
     <Button
         android:id="@+id/button6"
