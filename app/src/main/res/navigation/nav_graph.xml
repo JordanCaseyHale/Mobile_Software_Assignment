@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/JourneyStart">
+
+    <fragment
+        android:id="@+id/HomePage"
+        android:name="com.example.mobilesoftwareassignment.JourneyView"
+        android:label="Home Page"
+        tools:layout="@layout/home_page">
+
+        <action
+            android:id="@+id/action_HomePage_to_JourneyStart"
+            app:destination="@id/JourneyStart" />
+    </fragment>
+    <fragment
+        android:id="@+id/JourneyStart"
+        android:name="com.example.mobilesoftwareassignment.JourneyView"
+        android:label="Journey Start"
+        tools:layout="@layout/journey_start">
+
+        <action
+            android:id="@+id/action_JourneyStart_to_JourneyInProgress"
+            app:destination="@id/JourneyInProgress" />
+    </fragment>
+    <fragment
+        android:id="@+id/JourneyInProgress"
+        android:name="com.example.mobilesoftwareassignment.JourneyView"
+        android:label="Journey In Progress"
+        tools:layout="@layout/journey_in_progress">
+
+        <action
+            android:id="@+id/action_JourneyInProgress_to_JourneyStart"
+            app:destination="@id/JourneyStart" />
+    </fragment>
+
+</navigation>
