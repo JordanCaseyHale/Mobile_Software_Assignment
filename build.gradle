@@ -1,5 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    ext {
+        easy_image_version = '3.2.0'
+        coroutines_version = '1.5.2'
+        room_version = '2.3.0'
+    }
+
     repositories {
         google()
         mavenCentral()
