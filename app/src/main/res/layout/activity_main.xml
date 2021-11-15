@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Background Image -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,6 +17,7 @@
         tools:ignore="MissingConstraints" />
 
 
+    <!-- Second Button -->
     <Button
         android:id="@+id/button6"
         android:background="@drawable/gradient"
@@ -28,6 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button8" />
 
+    <!-- First Button -->
     <Button
         android:id="@+id/button7"
         android:layout_width="269dip"
@@ -39,6 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Third Button -->
     <Button
         android:id="@+id/button8"
         android:layout_width="269dip"
@@ -50,6 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button7" />
 
+    <!-- Fourth Button -->
     <Button
         android:id="@+id/button9"
         android:layout_width="269dip"
