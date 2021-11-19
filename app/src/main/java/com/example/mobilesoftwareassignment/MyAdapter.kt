@@ -16,7 +16,7 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private lateinit var context: Context
 
     constructor(items: List<ImageData>) : super() {
-        MyAdapter.items = items as MutableList<ImageData>
+        Companion.items = items as MutableList<ImageData>
     }
 
     constructor(cont: Context, items: List<ImageData>) : super() {
@@ -49,13 +49,19 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     }
                 }
             }
-
-            holder.itemView.setOnClickListener(View.OnClickListener {
-                val intent = Intent(context, ShowImageActivity::class.java)
-                intent.putExtra("position", position)
-                context.startActivity(intent)
-            })
         }
+
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            // val intent = Intent(context, ShowImageActivity::class.java)
+            // intent.putExtra("position", position)
+            // context.startActivity(intent)
+            val mainActivityContext = context as MainActivity
+            mainActivityContext.startForResult.launch(
+                Intent(context, ShowImageActivity::class.java).apply {
+                    putExtra("position", position)
+                }
+            )
+        })
     }
 
     override fun getItemCount(): Int {

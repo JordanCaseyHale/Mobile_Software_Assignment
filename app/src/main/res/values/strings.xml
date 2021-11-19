@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Travel App</string>
-
+    <string name="btnCancel">Cancel</string>
+    <string name="btnSave">Save</string>
+    <string name="btnDelete">Delete</string>
+    <string name="imageDescription">Description</string>
+    <string name="image_title_label">Title</string>
 </resources>

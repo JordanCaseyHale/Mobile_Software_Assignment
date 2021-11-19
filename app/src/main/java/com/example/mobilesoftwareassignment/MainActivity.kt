@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -34,10 +36,32 @@ class MainActivity : AppCompatActivity() {
     private lateinit var activity: Activity
     private lateinit var easyImage: EasyImage
 
+    companion object {
+        private val REQUEST_READ_EXTERNAL_STORAGE = 2987
+        private val REQUEST_WRITE_EXTERNAL_STORAGE = 7829
+        private val REQUEST_CAMERA_CODE = 100
+    }
+
+    val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val pos = result.data?.getIntExtra("position", -1)!!
+                val id = result.data?.getIntExtra("id", -1)!!
+                val del_flag = result.data?.getIntExtra("deletion_flag", -1)!!
+                if (pos != -1 && id != -1) {
+                    if (result.resultCode == Activity.RESULT_OK) {
+                        when(del_flag){
+                            -1, 0 -> mAdapter.notifyDataSetChanged()
+                            else -> mAdapter.notifyItemRemoved(pos)
+                        }
+                    }
+                }
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         daoObj = (this@MainActivity.application as ImageApplication).databaseObj.imageDataDao()
-        daoObj.nukeTable()
         setContentView(R.layout.activity_gallery)
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
@@ -64,25 +88,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-//    fun loadFile(){
-//        val dir = File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES), GALLERY_DIR)
-////        for(file in dir.listFiles()){
-////            Log.e(GALLERY_DIR, file.absolutePath)
-////        }
-//        Toast.makeText(this, dir.absolutePath, Toast.LENGTH_LONG).show()
-//    }
-
-//    fun getAppSpecificAlbumStorageDir(): File? {
-//        // Get the pictures directory that's inside the app-specific directory on
-//        // external storage.
-//        val file = File(context.getExternalFilesDir(
-//            Environment.DIRECTORY_PICTURES), albumName)
-//        if (!file?.mkdirs()) {
-//            Log.e(LOG_TAG, "Directory not created")
-//        }
-//        return file
-//    }
-
     /**
      * it initialises EasyImage
      */
@@ -99,13 +104,6 @@ class MainActivity : AppCompatActivity() {
      * Init data by loading from the database
      */
     private fun initData() {
-//        repeat(5){
-//            myDataset.add(ImageElement(R.drawable.joe1))
-//            myDataset.add(ImageElement(R.drawable.joe2))
-//            myDataset.add(ImageElement(R.drawable.joe3))
-//        }
-        // Your code here
-
         GlobalScope.launch {
             daoObj = (this@MainActivity.application as ImageApplication).databaseObj.imageDataDao()
             var data = daoObj.getItems()
@@ -272,9 +270,5 @@ class MainActivity : AppCompatActivity() {
         return imageDataList
     }
 
-    companion object {
-        private val REQUEST_READ_EXTERNAL_STORAGE = 2987
-        private val REQUEST_WRITE_EXTERNAL_STORAGE = 7829
-        private val REQUEST_CAMERA_CODE = 100
-    }
+
 }
