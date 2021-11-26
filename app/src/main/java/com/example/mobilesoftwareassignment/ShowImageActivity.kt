@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.mobilesoftwareassignment.data.ImageDataDao
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -55,19 +56,20 @@ class ShowImageActivity : AppCompatActivity() {
     private fun displayData(position: Int){
         if (position != -1) {
             val imageView = findViewById<ImageView>(R.id.show_image)
-            val imgTitle = findViewById<Toolbar>(R.id.show_toolbar)
-            val descriptionTextView = findViewById<TextView>(R.id.title)
-            val descriptionTextView2 = findViewById<TextView>(R.id.title4)
+            //val imgTitle = findViewById<Toolbar>(R.id.show_toolbar)
+            val imgTitle = findViewById<TextView>(R.id.title)
+            val descriptionTextView = findViewById<TextView>(R.id.description)
+            val descriptionTextView2 = findViewById<TextView>(R.id.description2)
             val imageData = MyAdapter.items[position]
 
             imageView.setImageBitmap(MyAdapter.items[position].thumbnail!!)
-            imgTitle.title = MyAdapter.items[position].imageTitle
+            imgTitle.text = MyAdapter.items[position].imageTitle
             descriptionTextView.text = MyAdapter.items[position].imageDescription
             descriptionTextView2.text = MyAdapter.items[position].imageDescription
-            val fabEdit: FloatingActionButton = findViewById(R.id.fab_edit)
+            val fabEdit: ExtendedFloatingActionButton = findViewById(R.id.fab_edit)
             fabEdit.setOnClickListener(View.OnClickListener {
                 startForResult.launch(
-                    Intent( this, EditActivity::class.java).apply {
+                    Intent( this, MainActivity::class.java).apply {
                         putExtra("position", position)
                     }
                 )
