@@ -3,20 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/drawable-v24/ic_add_a_photo_black_24dp.xml" value="0.3314814814814815" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/drawable-v24/ic_baseline_edit_note_24.xml" value="0.1" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/drawable-v24/ic_gallery_black_24dp.xml" value="0.1" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.1" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/activity_camera.xml" value="0.1" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/activity_edit.xml" value="0.2269021739130435" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/activity_gallery.xml" value="0.1" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/activity_main.xml" value="0.19583333333333333" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/activity_show_image.xml" value="0.1" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/browse_previews.xml" value="0.1" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/content_camera.xml" value="0.1" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/list_item_image.xml" value="0.1" />
-        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.17962962962962964" />
+        <entry key="..\:/Users/Chelsie/AndroidStudioProjects/Mobile_Software_Assignment/app/src/main/res/drawable/gradient.xml" value="0.2703125" />
+        <entry key="..\:/Users/Chelsie/AndroidStudioProjects/Mobile_Software_Assignment/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1175925925925926" />
+        <entry key="..\:/Users/Chelsie/AndroidStudioProjects/Mobile_Software_Assignment/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/activity_gallery.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/activity_show_image.xml" value="0.14722222222222223" />
       </map>
     </option>
   </component>
@@ -25,5 +16,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.25416666666666665" />
+      </ProjectState>
+    </option>
   </component>
 </project>

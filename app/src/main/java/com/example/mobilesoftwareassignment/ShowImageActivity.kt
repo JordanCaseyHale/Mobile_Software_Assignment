@@ -55,14 +55,15 @@ class ShowImageActivity : AppCompatActivity() {
     private fun displayData(position: Int){
         if (position != -1) {
             val imageView = findViewById<ImageView>(R.id.show_image)
-            val titleToolbar = findViewById<Toolbar>(R.id.show_toolbar)
-            val descriptionTextView = findViewById<TextView>(R.id.show_image_description)
+            val imgTitle = findViewById<Toolbar>(R.id.show_toolbar)
+            val descriptionTextView = findViewById<TextView>(R.id.title)
+            val descriptionTextView2 = findViewById<TextView>(R.id.title4)
             val imageData = MyAdapter.items[position]
 
             imageView.setImageBitmap(MyAdapter.items[position].thumbnail!!)
-            titleToolbar.title = MyAdapter.items[position].imageTitle
+            imgTitle.title = MyAdapter.items[position].imageTitle
             descriptionTextView.text = MyAdapter.items[position].imageDescription
-
+            descriptionTextView2.text = MyAdapter.items[position].imageDescription
             val fabEdit: FloatingActionButton = findViewById(R.id.fab_edit)
             fabEdit.setOnClickListener(View.OnClickListener {
                 startForResult.launch(
