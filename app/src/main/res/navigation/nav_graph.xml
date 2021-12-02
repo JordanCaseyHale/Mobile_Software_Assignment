@@ -14,6 +14,15 @@
         <action
             android:id="@+id/action_HomePage_to_JourneyStart"
             app:destination="@id/JourneyStart" />
+        <action
+            android:id="@+id/action_HomePage_to_MapHistory"
+            app:destination="@id/MapHistory" />
+        <action
+            android:id="@+id/action_HomePage_to_Map"
+            app:destination="@id/Map" />
+        <action
+            android:id="@+id/action_HomePage_to_BrowsePreviews"
+            app:destination="@id/BrowsePreviews" />
     </fragment>
     <fragment
         android:id="@+id/JourneyStart"
@@ -40,10 +49,6 @@
         android:name="com.example.mobilesoftwareassignment.view.JourneyInProgressFragment"
         android:label="Map History"
         tools:layout="@layout/map_history">
-
-        <action
-            android:id="@+id/action_MapHistory_to_HomePage"
-            app:destination="@id/HomePage" />
     </fragment>
     <fragment
         android:id="@+id/BrowsePreviews"
@@ -54,21 +59,13 @@
     <fragment
         android:id="@+id/PreviewsMoreDetails"
         android:name="com.example.mobilesoftwareassignment.view.JourneyInProgressFragment"
-        android:label="Journey In Progress"
-        tools:layout="@layout/journey_in_progress">
-
-        <action
-            android:id="@+id/action_JourneyInProgress_to_JourneyStart"
-            app:destination="@id/JourneyStart" />
+        android:label="Preview More Details"
+        tools:layout="@layout/activity_show_image">
     </fragment>
     <fragment
         android:id="@+id/Map"
         android:name="com.example.mobilesoftwareassignment.view.JourneyInProgressFragment"
-        android:label="Journey In Progress"
-        tools:layout="@layout/journey_in_progress">
-
-        <action
-            android:id="@+id/action_JourneyInProgress_to_JourneyStart"
-            app:destination="@id/JourneyStart" />
+        android:label="Map"
+        tools:layout="@layout/map">
     </fragment>
 </navigation>
