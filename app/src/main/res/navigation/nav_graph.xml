@@ -35,4 +35,40 @@
             android:id="@+id/action_JourneyInProgress_to_JourneyStart"
             app:destination="@id/JourneyStart" />
     </fragment>
+    <fragment
+        android:id="@+id/MapHistory"
+        android:name="com.example.mobilesoftwareassignment.view.JourneyInProgressFragment"
+        android:label="Map History"
+        tools:layout="@layout/map_history">
+
+        <action
+            android:id="@+id/action_MapHistory_to_HomePage"
+            app:destination="@id/HomePage" />
+    </fragment>
+    <fragment
+        android:id="@+id/BrowsePreviews"
+        android:name="com.example.mobilesoftwareassignment.view.JourneyInProgressFragment"
+        android:label="Browse Previews"
+        tools:layout="@layout/browse_previews">
+    </fragment>
+    <fragment
+        android:id="@+id/PreviewsMoreDetails"
+        android:name="com.example.mobilesoftwareassignment.view.JourneyInProgressFragment"
+        android:label="Journey In Progress"
+        tools:layout="@layout/journey_in_progress">
+
+        <action
+            android:id="@+id/action_JourneyInProgress_to_JourneyStart"
+            app:destination="@id/JourneyStart" />
+    </fragment>
+    <fragment
+        android:id="@+id/Map"
+        android:name="com.example.mobilesoftwareassignment.view.JourneyInProgressFragment"
+        android:label="Journey In Progress"
+        tools:layout="@layout/journey_in_progress">
+
+        <action
+            android:id="@+id/action_JourneyInProgress_to_JourneyStart"
+            app:destination="@id/JourneyStart" />
+    </fragment>
 </navigation>
