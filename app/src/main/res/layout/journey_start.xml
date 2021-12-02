@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".JourneyView">
+    tools:context=".view.JourneyStartFragment">
 
     <TextView
         android:id="@+id/title"
@@ -40,14 +40,14 @@
         android:text="Your location and time will be automatically recorded."
         android:textSize="16sp"
         android:gravity="center_horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintBottom_toTopOf="@+id/JourneyStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editVisitTitle"
         app:layout_constraintVertical_bias="0.56" />
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/JourneyStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"

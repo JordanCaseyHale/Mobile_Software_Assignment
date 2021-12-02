@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/HomePage"
-        android:name="com.example.mobilesoftwareassignment.JourneyView"
+        android:name="com.example.mobilesoftwareassignment.view.HomePage"
         android:label="Home Page"
         tools:layout="@layout/home_page">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/JourneyStart"
-        android:name="com.example.mobilesoftwareassignment.JourneyView"
+        android:name="com.example.mobilesoftwareassignment.view.JourneyStartFragment"
         android:label="Journey Start"
         tools:layout="@layout/journey_start">
 
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/JourneyInProgress"
-        android:name="com.example.mobilesoftwareassignment.JourneyView"
+        android:name="com.example.mobilesoftwareassignment.view.JourneyInProgressFragment"
         android:label="Journey In Progress"
         tools:layout="@layout/journey_in_progress">
 
@@ -35,5 +35,4 @@
             android:id="@+id/action_JourneyInProgress_to_JourneyStart"
             app:destination="@id/JourneyStart" />
     </fragment>
-
 </navigation>
