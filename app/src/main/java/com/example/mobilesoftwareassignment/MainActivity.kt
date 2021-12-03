@@ -259,12 +259,12 @@ class MainActivity : AppCompatActivity() {
         for (mediaFile in returnedPhotos) {
             val fileNameAsTempTitle = mediaFile.file.name
             var imageData = ImageData(
-                imageTitle = fileNameAsTempTitle,
+                //imageTitle = fileNameAsTempTitle,
                 imageUri = mediaFile.file.absolutePath
             )
             // Update the database with the newly created object
             var id = insertData(imageData)
-            imageData.id = id
+            imageData.imageId = id
             imageDataList.add(imageData)
         }
         return imageDataList

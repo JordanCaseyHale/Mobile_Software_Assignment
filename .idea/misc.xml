@@ -5,9 +5,10 @@
       <map>
         <entry key="..\:/Users/Chelsie/AndroidStudioProjects/Mobile_Software_Assignment/app/src/main/res/drawable/gradient.xml" value="0.2703125" />
         <entry key="..\:/Users/Chelsie/AndroidStudioProjects/Mobile_Software_Assignment/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1175925925925926" />
-        <entry key="..\:/Users/Chelsie/AndroidStudioProjects/Mobile_Software_Assignment/app/src/main/res/layout/activity_edit.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Chelsie/AndroidStudioProjects/Mobile_Software_Assignment/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Chelsie/AndroidStudioProjects/Mobile_Software_Assignment/app/src/main/res/layout/activity_show_image.xml" value="0.24003623188405798" />
+        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/activity_gallery.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/activity_main.xml" value="0.25905797101449274" />
+        <entry key="..\:/Users/class/OneDrive/Desktop/University/Year3/COM31007 Software Development for Mobile Devices/Mobile_Software_Assignment/app/src/main/res/layout/activity_show_image.xml" value="0.14722222222222223" />
       </map>
     </option>
   </component>

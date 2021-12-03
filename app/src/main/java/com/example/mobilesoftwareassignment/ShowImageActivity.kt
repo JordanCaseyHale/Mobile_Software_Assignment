@@ -61,11 +61,12 @@ class ShowImageActivity : AppCompatActivity() {
             val descriptionTextView = findViewById<TextView>(R.id.description)
             val descriptionTextView2 = findViewById<TextView>(R.id.description2)
             val imageData = MyAdapter.items[position]
+            //val loc = MyAdapter.items[loca]
 
             imageView.setImageBitmap(MyAdapter.items[position].thumbnail!!)
-            imgTitle.text = MyAdapter.items[position].imageTitle
-            descriptionTextView.text = MyAdapter.items[position].imageDescription
-            descriptionTextView2.text = MyAdapter.items[position].imageDescription
+            //imgTitle.text = MyAdapter.items[position].imageTitle
+            //descriptionTextView.text = MyAdapter.items[position].imageDescription
+            //descriptionTextView2.text = MyAdapter.items[position].imageDescription
             val fabEdit: ExtendedFloatingActionButton = findViewById(R.id.fab_edit)
             fabEdit.setOnClickListener(View.OnClickListener {
                 startForResult.launch(

@@ -41,8 +41,8 @@ class EditActivity : AppCompatActivity() {
                 MyAdapter.items[position].let {
                     imageView.setImageBitmap(it.thumbnail)
 
-                    titleEditToolbar.title = it.imageTitle
-                    titleTextInput.setText(it.imageTitle)
+                    //titleEditToolbar.title = it.imageTitle
+                    //titleTextInput.setText(it.imageTitle)
                     descriptionTextInput.setText(it.imageDescription ?: "N/A")
                 }
             }
@@ -50,7 +50,7 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun makeButtonListeners(position: Int) {
-        var id = MyAdapter.items[position].id
+        var id = MyAdapter.items[position].imageId
         val cancelButton: Button = findViewById(R.id.cancel_button)
         cancelButton.setOnClickListener {
             this@EditActivity.finish()
@@ -80,7 +80,7 @@ class EditActivity : AppCompatActivity() {
                 findViewById<TextInputEditText>(R.id.edit_image_description)
             MyAdapter.items[position].imageDescription = descriptionTextInput.text.toString()
             val titleTextInput = findViewById<TextInputEditText>(R.id.edit_image_title)
-            MyAdapter.items[position].imageTitle = titleTextInput.text.toString()
+            //MyAdapter.items[position].imageTitle = titleTextInput.text.toString()
 
             scope.launch(Dispatchers.IO) {
                 async { daoObj.update(MyAdapter.items[position]) }
