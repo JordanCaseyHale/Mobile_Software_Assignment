@@ -30,8 +30,17 @@ class HomePage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.homePageMapButton.setOnClickListener {
+        binding.homePageJourneyButton.setOnClickListener {
             findNavController().navigate(R.id.action_HomePage_to_JourneyStart)
+        }
+        binding.homePagePicturePreview.setOnClickListener {
+            findNavController().navigate(R.id.action_HomePage_to_BrowsePreviews)
+        }
+        binding.homePageMapButton.setOnClickListener {
+            findNavController().navigate(R.id.action_HomePage_to_Map)
+        }
+        binding.homePageMapHistory.setOnClickListener {
+            findNavController().navigate(R.id.action_HomePage_to_MapHistory)
         }
     }
 

@@ -52,9 +52,9 @@
     </fragment>
     <fragment
         android:id="@+id/BrowsePreviews"
-        android:name="com.example.mobilesoftwareassignment.view.JourneyInProgressFragment"
+        android:name="com.example.mobilesoftwareassignment.view.BrowsePreviewsFragment"
         android:label="Browse Previews"
-        tools:layout="@layout/browse_previews">
+        tools:layout="@layout/activity_gallery">
     </fragment>
     <fragment
         android:id="@+id/PreviewsMoreDetails"

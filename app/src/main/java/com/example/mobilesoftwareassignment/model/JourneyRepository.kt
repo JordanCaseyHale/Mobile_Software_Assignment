@@ -1,4 +1,4 @@
-package com.example.mobilesoftwareassignment
+package com.example.mobilesoftwareassignment.model
 
 import android.app.Application
 
