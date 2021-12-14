@@ -1,5 +1,6 @@
 package com.example.mobilesoftwareassignment
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -10,11 +11,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilesoftwareassignment.data.ImageData
+import com.example.mobilesoftwareassignment.view.BrowsePreviewsFragment
+import com.example.mobilesoftwareassignment.view.MainActivity
 import kotlinx.coroutines.*
 
 class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private lateinit var context: Context
-
+    private lateinit var activity: Activity
     constructor(items: List<ImageData>) : super() {
         Companion.items = items as MutableList<ImageData>
     }
@@ -52,10 +55,7 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
 
         holder.itemView.setOnClickListener(View.OnClickListener {
-            // val intent = Intent(context, ShowImageActivity::class.java)
-            // intent.putExtra("position", position)
-            // context.startActivity(intent)
-            val mainActivityContext = context as MainActivity
+            val mainActivityContext = activity as BrowsePreviewsFragment
             mainActivityContext.startForResult.launch(
                 Intent(context, ShowImageActivity::class.java).apply {
                     putExtra("position", position)

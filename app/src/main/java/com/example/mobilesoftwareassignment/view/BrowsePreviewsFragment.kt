@@ -1,5 +1,6 @@
-package com.example.mobilesoftwareassignment
+package com.example.mobilesoftwareassignment.view
 
+import androidx.fragment.app.FragmentActivity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -12,29 +13,38 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.example.mobilesoftwareassignment.ImageApplication
+import com.example.mobilesoftwareassignment.MyAdapter
+import com.example.mobilesoftwareassignment.ShowImageActivity
 import com.example.mobilesoftwareassignment.data.ImageData
 import com.example.mobilesoftwareassignment.data.ImageDataDao
+import com.example.mobilesoftwareassignment.databinding.ActivityGalleryBinding
+import com.example.mobilesoftwareassignment.databinding.BrowsePreviewsBinding
+import com.example.mobilesoftwareassignment.databinding.ContentCameraBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.*
 import pl.aprilapps.easyphotopicker.*
 
 import java.util.ArrayList
+class BrowsePreviewsFragment : Fragment() {
 
-class MainActivity : AppCompatActivity() {
     private var myDataset: MutableList<ImageData> = ArrayList<ImageData>()
     private lateinit var daoObj: ImageDataDao
     private lateinit var mAdapter: Adapter<RecyclerView.ViewHolder>
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var activity: Activity
+    private lateinit var fragment: FragmentActivity
     private lateinit var easyImage: EasyImage
 
     companion object {
@@ -42,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         private val REQUEST_WRITE_EXTERNAL_STORAGE = 7829
         private val REQUEST_CAMERA_CODE = 100
     }
+
 
     val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -60,38 +71,54 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        daoObj = (this@MainActivity.application as ImageApplication).databaseObj.imageDataDao()
-        setContentView(R.layout.activity_gallery)
-        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+    private var _binding: ActivityGalleryBinding? = null
+
+
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+
+    ): View? {
+        _binding = ActivityGalleryBinding.inflate(inflater, container, false)
+        val view = ContentCameraBinding.inflate(inflater, container, false)
+
+        daoObj = (BrowsePreviewsFragment as ImageApplication).databaseObj.imageDataDao()
+        //setContentView(R.layout.activity_gallery)
+        //val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
         initData()
 
-        activity = this
+        fragment = getActivity()!!
         Log.d("TAG", "message")
-        mRecyclerView = findViewById(R.id.grid_recycler_view)
+        mRecyclerView = view.gridRecyclerView
         // set up the RecyclerView
         val numberOfColumns = 4
-        mRecyclerView.layoutManager = GridLayoutManager(this, numberOfColumns)
+        mRecyclerView.layoutManager = GridLayoutManager(BrowsePreviewsFragment, numberOfColumns)
         mAdapter = MyAdapter(myDataset) as Adapter<RecyclerView.ViewHolder>
         mRecyclerView.adapter = mAdapter
 
 
         // required by Android 6.0 +
-        checkPermissions(applicationContext)
+        checkPermissions(requireActivity().application)
         initEasyImage()
 
         // the floating button that will allow us to get the images from the Gallery
-        val fabGallery: FloatingActionButton = findViewById(R.id.fab_gallery)
+        val fabGallery: FloatingActionButton = _binding!!.fabGallery
         fabGallery.setOnClickListener(View.OnClickListener {
-            easyImage.openChooser(this@MainActivity)
+            easyImage.openChooser(fragment)
         })
 
-        val goBack: Button = findViewById(R.id.button1)
+        /*val goBack: Button = findViewById(R.id.button1)
         goBack.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this, ShowImageActivity::class.java))
-        })
+        })*/
+
+        return binding.root
 
     }
 
@@ -99,25 +126,23 @@ class MainActivity : AppCompatActivity() {
      * it initialises EasyImage
      */
     private fun initEasyImage() {
-        easyImage = EasyImage.Builder(this)
+        easyImage = EasyImage.Builder(fragment)
             .setChooserTitle("Pick media")
             .setChooserType(ChooserType.CAMERA_AND_GALLERY)
             .allowMultiple(true)
             .setCopyImagesToPublicGalleryFolder(true)
             .build()
     }
-
     /**
      * Init data by loading from the database
      */
     private fun initData() {
         GlobalScope.launch {
-            daoObj = (this@MainActivity.application as ImageApplication).databaseObj.imageDataDao()
+            daoObj = (fragment.application as ImageApplication).databaseObj.imageDataDao()
             var data = daoObj.getItems()
             myDataset.addAll(data)
         }
     }
-
     /**
      * insert a ImageData into the database
      * Called for each image the user adds by clicking the fab button
@@ -144,7 +169,7 @@ class MainActivity : AppCompatActivity() {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        this,
+                        fragment,
                         Manifest.permission.READ_EXTERNAL_STORAGE
                     )
                 ) {
@@ -165,7 +190,7 @@ class MainActivity : AppCompatActivity() {
                     alert.show()
                 } else {
                     ActivityCompat.requestPermissions(
-                        this,
+                        fragment,
                         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                         REQUEST_READ_EXTERNAL_STORAGE
                     )
@@ -177,7 +202,7 @@ class MainActivity : AppCompatActivity() {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        this,
+                        fragment,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
                     )
                 ) {
@@ -197,7 +222,7 @@ class MainActivity : AppCompatActivity() {
                     alert.show()
                 } else {
                     ActivityCompat.requestPermissions(
-                        this,
+                        fragment,
                         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                         REQUEST_WRITE_EXTERNAL_STORAGE
                     )
@@ -209,7 +234,7 @@ class MainActivity : AppCompatActivity() {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 ActivityCompat.requestPermissions(
-                    this,
+                    fragment,
                     arrayOf(Manifest.permission.CAMERA),
                     REQUEST_CAMERA_CODE);
             }
@@ -219,7 +244,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        easyImage.handleActivityResult(requestCode, resultCode,data,this,
+        easyImage.handleActivityResult(requestCode, resultCode,data,fragment,
             object: DefaultCallback() {
                 override fun onMediaFilesPicked(imageFiles: Array<MediaFile>, source: MediaSource) {
                     onPhotosReturned(imageFiles)
@@ -271,5 +296,10 @@ class MainActivity : AppCompatActivity() {
         return imageDataList
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

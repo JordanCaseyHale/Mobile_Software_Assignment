@@ -28,7 +28,7 @@
         android:theme="@style/Theme.MobileSoftwareAssignment">
         //android:name="com.example.mobilesoftwareassignment.MainActivity"
         <activity
-            android:name="com.example.mobilesoftwareassignment.MainActivity"
+            android:name="com.example.mobilesoftwareassignment.view.MainActivity"
         android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
