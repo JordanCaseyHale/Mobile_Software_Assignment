@@ -29,4 +29,10 @@
         android:layout_margin="@dimen/fab_margin"
         app:fabSize="normal"
         android:src="@drawable/ic_gallery_black_24dp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="269dip"
+        android:layout_height="108dip"
+        android:text="Back" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

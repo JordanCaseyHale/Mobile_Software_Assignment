@@ -29,6 +29,6 @@ data class Journey(
     @ColumnInfo(name="title") val title: String? = null,
     @ColumnInfo(name="start_time") var time: String? = null, //time: Time? = null,
     @ColumnInfo(name="end_time") var endTime: String? = null, //var endTime: Time? = null,
-    @ColumnInfo(name="date") var data: String? = null,
+    @ColumnInfo(name="date") var date: String? = null,
     @ColumnInfo(name="start_location_id") var startLocId: Int? = null,
     @ColumnInfo(name="end_location_id") var endLocId: Int? = null,)

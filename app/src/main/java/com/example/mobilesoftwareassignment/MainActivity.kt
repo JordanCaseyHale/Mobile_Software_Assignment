@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -86,6 +87,12 @@ class MainActivity : AppCompatActivity() {
         fabGallery.setOnClickListener(View.OnClickListener {
             easyImage.openChooser(this@MainActivity)
         })
+
+        val goBack: Button = findViewById(R.id.button1)
+        goBack.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this, ShowImageActivity::class.java))
+        })
+
     }
 
     /**
@@ -249,12 +256,6 @@ class MainActivity : AppCompatActivity() {
      * @return
      */
     private fun getImageData(returnedPhotos: Array<MediaFile>): List<ImageData> {
-//        val imageElementList: MutableList<ImageElement> = ArrayList<ImageElement>()
-//        for (file in returnedPhotos) {
-//            val element = ImageElement(file)
-//            imageElementList.add(element)
-//        }
-//        return imageElementList
         val imageDataList: MutableList<ImageData> = ArrayList<ImageData>()
         for (mediaFile in returnedPhotos) {
             val fileNameAsTempTitle = mediaFile.file.name

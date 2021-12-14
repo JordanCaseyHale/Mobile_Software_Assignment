@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import java.sql.Date
+import java.sql.Time
 
 /**
  * Database class with a singleton INSTANCE object.
