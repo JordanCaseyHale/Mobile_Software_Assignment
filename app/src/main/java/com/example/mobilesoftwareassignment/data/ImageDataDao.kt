@@ -30,7 +30,4 @@ interface ImageDataDao {
     @Delete
     suspend fun delete(imageData: ImageData)
 
-    @Query("DELETE FROM image")
-    fun nukeTable()
-
 }

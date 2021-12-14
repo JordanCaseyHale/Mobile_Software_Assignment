@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         daoObj = (this@MainActivity.application as ImageApplication).databaseObj.imageDataDao()
-        daoObj.nukeTable()
         setContentView(R.layout.activity_gallery)
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
