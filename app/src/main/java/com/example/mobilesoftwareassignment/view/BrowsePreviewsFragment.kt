@@ -19,11 +19,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.mobilesoftwareassignment.ImageApplication
@@ -94,22 +96,7 @@ class BrowsePreviewsFragment : Fragment() {
         daoObj = (fragment.application as ImageApplication).databaseObj.imageDataDao()
         //setContentView(R.layout.activity_gallery)
         //val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
-        initData()
-        Log.d("TAG", "message")
 
-        //mRecyclerView = view.findViewById(R.id.grid_recycler_view)
-        //mRecyclerView = fragment.findViewById(R.id.grid_recycler_view)
-        mRecyclerView = view.gridRecyclerView
-        // set up the RecyclerView
-        val numberOfColumns = 4
-        mRecyclerView.layoutManager = GridLayoutManager(fragment, numberOfColumns)
-        mAdapter = MyAdapter(myDataset) as Adapter<RecyclerView.ViewHolder>
-        mRecyclerView.adapter = mAdapter
-
-
-        // required by Android 6.0 +
-        checkPermissions(requireActivity().application)
-        initEasyImage()
 
         // the floating button that will allow us to get the images from the Gallery
         val fabGallery: FloatingActionButton = _binding!!.fabGallery
@@ -131,7 +118,23 @@ class BrowsePreviewsFragment : Fragment() {
         binding.button1.setOnClickListener {
             findNavController().navigate(R.id.action_BrowsePreviews_to_HomePage)
         }
+        initData()
+        Log.d("TAG", "message")
+        //mRecyclerView = view.findViewById(R.id.grid_recycler_view)
+        mRecyclerView = view.findViewById(R.id.grid_recycler_view)
+        //mRecyclerView = view.gridRecyclerView
+        // set up the RecyclerView
+        val numberOfColumns = 4
+        mRecyclerView.layoutManager = GridLayoutManager(fragment, numberOfColumns)
+        mAdapter = MyAdapter(myDataset) as Adapter<RecyclerView.ViewHolder>
+        mRecyclerView.adapter = mAdapter
+
+
+        // required by Android 6.0 +
+        checkPermissions(requireActivity().application)
+        initEasyImage()
     }
+
 
     /**
      * it initialises EasyImage
