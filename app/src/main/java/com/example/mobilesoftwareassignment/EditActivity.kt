@@ -2,13 +2,14 @@ package com.example.mobilesoftwareassignment
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import com.example.mobilesoftwareassignment.data.ImageDataDao
+import com.example.mobilesoftwareassignment.view.ImageApplication
+import com.example.mobilesoftwareassignment.view.MyAdapter
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.*
 

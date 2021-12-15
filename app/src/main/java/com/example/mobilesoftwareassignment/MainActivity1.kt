@@ -1,6 +1,5 @@
-package com.example.mobilesoftwareassignment.view
+package com.example.mobilesoftwareassignment
 
-import androidx.fragment.app.FragmentActivity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -12,139 +11,118 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
-import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.example.mobilesoftwareassignment.R
+import com.example.mobilesoftwareassignment.view.ImageApplication
 import com.example.mobilesoftwareassignment.data.ImageData
 import com.example.mobilesoftwareassignment.data.ImageDataDao
-import com.example.mobilesoftwareassignment.databinding.ActivityGalleryBinding
-import com.example.mobilesoftwareassignment.databinding.ContentCameraBinding
+import com.example.mobilesoftwareassignment.view.MyAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import pl.aprilapps.easyphotopicker.*
-
 import java.util.ArrayList
-class BrowsePreviewsFragment : Fragment() {
+
+class MainActivity1 : AppCompatActivity() {
 
     private var myDataset: MutableList<ImageData> = ArrayList<ImageData>()
     private lateinit var daoObj: ImageDataDao
     private lateinit var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var fragment: FragmentActivity
+    private lateinit var activity: Activity
     private lateinit var easyImage: EasyImage
 
-    companion object {
-        private val REQUEST_READ_EXTERNAL_STORAGE = 2987
-        private val REQUEST_WRITE_EXTERNAL_STORAGE = 7829
-        private val REQUEST_CAMERA_CODE = 100
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        daoObj = (this@MainActivity1.application as ImageApplication).databaseObj.imageDataDao()
+        setContentView(R.layout.activity_gallery)
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
 
-
-    val startForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val pos = result.data?.getIntExtra("position", -1)!!
-                val id = result.data?.getIntExtra("id", -1)!!
-                val del_flag = result.data?.getIntExtra("deletion_flag", -1)!!
-                if (pos != -1 && id != -1) {
-                    if (result.resultCode == Activity.RESULT_OK) {
-                        when(del_flag){
-                            -1, 0 -> mAdapter.notifyDataSetChanged()
-                            else -> mAdapter.notifyItemRemoved(pos)
-                        }
-                    }
-                }
-            }
-        }
-
-    private var _binding: ActivityGalleryBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-
-    ): View? {
-        _binding = ActivityGalleryBinding.inflate(inflater, container, false)
-        val view = ContentCameraBinding.inflate(inflater, container, false)
-        // this.activity?.application
-        fragment = activity!!
-        //setContentView(R.layout.activity_gallery)
-        // the floating button that will allow us to get the images from the Gallery
-        val fabGallery: FloatingActionButton = _binding!!.fabGallery
-        fabGallery.setOnClickListener(View.OnClickListener {
-            easyImage.openChooser(fragment)
-        })
-
-        /*val goBack: Button = findViewById(R.id.button1)
-        goBack.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(this, ShowImageActivity::class.java))
-        })*/
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.button1.setOnClickListener {
-            findNavController().navigate(R.id.action_BrowsePreviews_to_HomePage)
-        }
-        daoObj = (fragment.application as ImageApplication).databaseObj.imageDataDao()
         initData()
+
+        activity = this
         Log.d("TAG", "message")
-        //mRecyclerView = view.findViewById(R.id.grid_recycler_view)
-        mRecyclerView = view.findViewById(R.id.grid_recycler_view)
-        //mRecyclerView = view.gridRecyclerView
+        mRecyclerView = findViewById(R.id.grid_recycler_view)
         // set up the RecyclerView
         val numberOfColumns = 4
-        mRecyclerView.layoutManager = GridLayoutManager(fragment, numberOfColumns)
-        mAdapter = MyAdapter(myDataset) as Adapter<RecyclerView.ViewHolder>
+        mRecyclerView.layoutManager = GridLayoutManager(this, numberOfColumns)
+        mAdapter = MyAdapter(myDataset) as RecyclerView.Adapter<RecyclerView.ViewHolder>
         mRecyclerView.adapter = mAdapter
+
+
         // required by Android 6.0 +
-        checkPermissions(requireActivity().application)
+        checkPermissions(applicationContext)
         initEasyImage()
+
+        // the floating button that will allow us to get the images from the Gallery
+        val fabGallery: FloatingActionButton = findViewById(R.id.fab_gallery)
+        fabGallery.setOnClickListener(View.OnClickListener {
+            easyImage.openChooser(this@MainActivity1)
+        })
     }
+
+//    fun loadFile(){
+//        val dir = File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES), GALLERY_DIR)
+////        for(file in dir.listFiles()){
+////            Log.e(GALLERY_DIR, file.absolutePath)
+////        }
+//        Toast.makeText(this, dir.absolutePath, Toast.LENGTH_LONG).show()
+//    }
+
+//    fun getAppSpecificAlbumStorageDir(): File? {
+//        // Get the pictures directory that's inside the app-specific directory on
+//        // external storage.
+//        val file = File(context.getExternalFilesDir(
+//            Environment.DIRECTORY_PICTURES), albumName)
+//        if (!file?.mkdirs()) {
+//            Log.e(LOG_TAG, "Directory not created")
+//        }
+//        return file
+//    }
 
     /**
      * it initialises EasyImage
      */
     private fun initEasyImage() {
-        easyImage = EasyImage.Builder(fragment)
+        easyImage = EasyImage.Builder(this)
             .setChooserTitle("Pick media")
             .setChooserType(ChooserType.CAMERA_AND_GALLERY)
             .allowMultiple(true)
             .setCopyImagesToPublicGalleryFolder(true)
             .build()
     }
+
     /**
      * Init data by loading from the database
      */
     private fun initData() {
+//        repeat(5){
+//            myDataset.add(ImageElement(R.drawable.joe1))
+//            myDataset.add(ImageElement(R.drawable.joe2))
+//            myDataset.add(ImageElement(R.drawable.joe3))
+//        }
+        // Your code here
+
         GlobalScope.launch {
-            daoObj = (fragment.application as ImageApplication).databaseObj.imageDataDao()
+            daoObj = (this@MainActivity1.application as ImageApplication).databaseObj.imageDataDao()
             var data = daoObj.getItems()
             myDataset.addAll(data)
         }
     }
+
     /**
      * insert a ImageData into the database
      * Called for each image the user adds by clicking the fab button
      * Then retrieves the same image so we can have the automatically assigned id field
      */
     private fun insertData(imageData: ImageData): Int = runBlocking {
+        //TODO: remove code
         var insertJob = async { daoObj.insert(imageData) }
         insertJob.await().toInt()
     }
@@ -164,7 +142,7 @@ class BrowsePreviewsFragment : Fragment() {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        fragment,
+                        this,
                         Manifest.permission.READ_EXTERNAL_STORAGE
                     )
                 ) {
@@ -185,7 +163,7 @@ class BrowsePreviewsFragment : Fragment() {
                     alert.show()
                 } else {
                     ActivityCompat.requestPermissions(
-                        fragment,
+                        this,
                         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                         REQUEST_READ_EXTERNAL_STORAGE
                     )
@@ -197,7 +175,7 @@ class BrowsePreviewsFragment : Fragment() {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        fragment,
+                        this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
                     )
                 ) {
@@ -217,7 +195,7 @@ class BrowsePreviewsFragment : Fragment() {
                     alert.show()
                 } else {
                     ActivityCompat.requestPermissions(
-                        fragment,
+                        this,
                         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                         REQUEST_WRITE_EXTERNAL_STORAGE
                     )
@@ -229,17 +207,17 @@ class BrowsePreviewsFragment : Fragment() {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 ActivityCompat.requestPermissions(
-                    fragment,
+                    this,
                     arrayOf(Manifest.permission.CAMERA),
                     REQUEST_CAMERA_CODE);
             }
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)  {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        easyImage.handleActivityResult(requestCode, resultCode,data,fragment,
+        easyImage.handleActivityResult(requestCode, resultCode,data,this,
             object: DefaultCallback() {
                 override fun onMediaFilesPicked(imageFiles: Array<MediaFile>, source: MediaSource) {
                     onPhotosReturned(imageFiles)
@@ -276,24 +254,32 @@ class BrowsePreviewsFragment : Fragment() {
      * @return
      */
     private fun getImageData(returnedPhotos: Array<MediaFile>): List<ImageData> {
+//        val imageElementList: MutableList<ImageElement> = ArrayList<ImageElement>()
+//        for (file in returnedPhotos) {
+//            val element = ImageElement(file)
+//            imageElementList.add(element)
+//        }
+//        return imageElementList
         val imageDataList: MutableList<ImageData> = ArrayList<ImageData>()
         for (mediaFile in returnedPhotos) {
             val fileNameAsTempTitle = mediaFile.file.name
             var imageData = ImageData(
-                //imageTitle = fileNameAsTempTitle,
                 imageUri = mediaFile.file.absolutePath
             )
             // Update the database with the newly created object
             var id = insertData(imageData)
+            imageData.imageId = id
             imageData.imageId = id
             imageDataList.add(imageData)
         }
         return imageDataList
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    companion object {
+        private val REQUEST_READ_EXTERNAL_STORAGE = 2987
+        private val REQUEST_WRITE_EXTERNAL_STORAGE = 7829
+        private val REQUEST_CAMERA_CODE = 100
     }
+
 
 }

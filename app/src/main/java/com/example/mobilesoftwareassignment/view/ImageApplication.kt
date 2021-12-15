@@ -1,4 +1,4 @@
-package com.example.mobilesoftwareassignment
+package com.example.mobilesoftwareassignment.view
 
 import android.app.Application
 import com.example.mobilesoftwareassignment.data.ImageRoomDatabase

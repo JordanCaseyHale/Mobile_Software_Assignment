@@ -1,16 +1,6 @@
 package com.example.mobilesoftwareassignment.view
 
-import android.Manifest
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -19,28 +9,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.mobilesoftwareassignment.ImageApplication
-import com.example.mobilesoftwareassignment.MyAdapter
 import com.example.mobilesoftwareassignment.R
-import com.example.mobilesoftwareassignment.ShowImageActivity
-import com.example.mobilesoftwareassignment.data.ImageData
-import com.example.mobilesoftwareassignment.data.ImageDataDao
 import com.example.mobilesoftwareassignment.databinding.ActivityMainBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import pl.aprilapps.easyphotopicker.*
-import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
 

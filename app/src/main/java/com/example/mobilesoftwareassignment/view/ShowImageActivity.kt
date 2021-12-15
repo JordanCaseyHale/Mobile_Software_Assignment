@@ -1,8 +1,7 @@
-package com.example.mobilesoftwareassignment
+package com.example.mobilesoftwareassignment.view
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -10,11 +9,10 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.example.mobilesoftwareassignment.MainActivity1
+import com.example.mobilesoftwareassignment.R
 import com.example.mobilesoftwareassignment.data.ImageDataDao
-import com.example.mobilesoftwareassignment.view.MainActivity
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -71,7 +69,7 @@ class ShowImageActivity : AppCompatActivity() {
             val fabEdit: ExtendedFloatingActionButton = findViewById(R.id.fab_edit)
             fabEdit.setOnClickListener(View.OnClickListener {
                 startForResult.launch(
-                    Intent( this, MainActivity::class.java).apply {
+                    Intent( this, MainActivity1::class.java).apply {
                         putExtra("position", position)
                     }
                 )

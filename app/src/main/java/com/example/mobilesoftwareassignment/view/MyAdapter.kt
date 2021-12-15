@@ -1,4 +1,4 @@
-package com.example.mobilesoftwareassignment
+package com.example.mobilesoftwareassignment.view
 
 import android.app.Activity
 import android.content.Context
@@ -9,11 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobilesoftwareassignment.R
 import com.example.mobilesoftwareassignment.data.ImageData
-import com.example.mobilesoftwareassignment.view.BrowsePreviewsFragment
-import com.example.mobilesoftwareassignment.view.MainActivity
 import kotlinx.coroutines.*
+import androidx.core.content.ContextCompat.startActivity
+
+
+
 
 class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private lateinit var context: Context
@@ -23,7 +28,7 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     constructor(cont: Context, items: List<ImageData>) : super() {
-        MyAdapter.items = items as MutableList<ImageData>
+        Companion.items = items as MutableList<ImageData>
         context = cont
     }
 
@@ -34,7 +39,7 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder> {
             parent, false
         )
 
-        val holder: MyAdapter.ViewHolder = ViewHolder(v)
+        val holder: ViewHolder = ViewHolder(v)
         context = parent.context
         return holder
     }
@@ -55,6 +60,7 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
 
         holder.itemView.setOnClickListener(View.OnClickListener {
+            val intent = Intent(context, BrowsePreviewsFragment::class.java)
             val mainActivityContext = activity as BrowsePreviewsFragment
             mainActivityContext.startForResult.launch(
                 Intent(context, ShowImageActivity::class.java).apply {
