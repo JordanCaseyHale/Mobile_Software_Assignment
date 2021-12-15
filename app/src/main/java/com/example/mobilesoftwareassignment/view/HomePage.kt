@@ -36,6 +36,9 @@ class HomePage : Fragment() {
         binding.homePageMapButton.setOnClickListener {
             findNavController().navigate(R.id.action_HomePage_to_JourneyStart)
         }
+        binding.homePagePicturePreview.setOnClickListener {
+            findNavController().navigate(R.id.action_HomePage_to_BrowsePreviews)
+        }
     }
 
     override fun onDestroyView() {

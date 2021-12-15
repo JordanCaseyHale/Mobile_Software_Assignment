@@ -22,11 +22,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.mobilesoftwareassignment.ImageApplication
 import com.example.mobilesoftwareassignment.MyAdapter
+import com.example.mobilesoftwareassignment.R
 import com.example.mobilesoftwareassignment.ShowImageActivity
 import com.example.mobilesoftwareassignment.data.ImageData
 import com.example.mobilesoftwareassignment.data.ImageDataDao
@@ -36,13 +38,14 @@ import com.example.mobilesoftwareassignment.databinding.ContentCameraBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.*
 import pl.aprilapps.easyphotopicker.*
+import kotlinx.android.synthetic.main.content_camera.grid_recycler_view
 
 import java.util.ArrayList
 class BrowsePreviewsFragment : Fragment() {
 
     private var myDataset: MutableList<ImageData> = ArrayList<ImageData>()
     private lateinit var daoObj: ImageDataDao
-    private lateinit var mAdapter: Adapter<RecyclerView.ViewHolder>
+    private lateinit var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var fragment: FragmentActivity
     private lateinit var easyImage: EasyImage
@@ -86,19 +89,20 @@ class BrowsePreviewsFragment : Fragment() {
     ): View? {
         _binding = ActivityGalleryBinding.inflate(inflater, container, false)
         val view = ContentCameraBinding.inflate(inflater, container, false)
-
-        daoObj = (BrowsePreviewsFragment as ImageApplication).databaseObj.imageDataDao()
+        // this.activity?.application
+        fragment = activity!!
+        daoObj = (fragment.application as ImageApplication).databaseObj.imageDataDao()
         //setContentView(R.layout.activity_gallery)
         //val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
-
         initData()
-
-        fragment = getActivity()!!
         Log.d("TAG", "message")
+
+        //mRecyclerView = view.findViewById(R.id.grid_recycler_view)
+        //mRecyclerView = fragment.findViewById(R.id.grid_recycler_view)
         mRecyclerView = view.gridRecyclerView
         // set up the RecyclerView
         val numberOfColumns = 4
-        mRecyclerView.layoutManager = GridLayoutManager(BrowsePreviewsFragment, numberOfColumns)
+        mRecyclerView.layoutManager = GridLayoutManager(fragment, numberOfColumns)
         mAdapter = MyAdapter(myDataset) as Adapter<RecyclerView.ViewHolder>
         mRecyclerView.adapter = mAdapter
 
@@ -119,7 +123,14 @@ class BrowsePreviewsFragment : Fragment() {
         })*/
 
         return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.button1.setOnClickListener {
+            findNavController().navigate(R.id.action_BrowsePreviews_to_HomePage)
+        }
     }
 
     /**

@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_HomePage_to_JourneyStart"
             app:destination="@id/JourneyStart" />
+        <action
+            android:id="@+id/action_HomePage_to_BrowsePreviews"
+            app:destination="@id/BrowsePreviews" />
     </fragment>
     <fragment
         android:id="@+id/JourneyStart"
@@ -34,5 +37,15 @@
         <action
             android:id="@+id/action_JourneyInProgress_to_JourneyStart"
             app:destination="@id/JourneyStart" />
+    </fragment>
+    <fragment
+        android:id="@+id/BrowsePreviews"
+        android:name="com.example.mobilesoftwareassignment.view.BrowsePreviewsFragment"
+        android:label="Browse Previews"
+        tools:layout="@layout/activity_gallery">
+
+        <action
+            android:id="@+id/action_BrowsePreviews_to_HomePage"
+            app:destination="@id/HomePage" />
     </fragment>
 </navigation>

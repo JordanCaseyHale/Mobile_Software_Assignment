@@ -46,36 +46,44 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private var myDataset: MutableList<ImageData> = ArrayList<ImageData>()
-    private lateinit var daoObj: ImageDataDao
-    private lateinit var mAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
-    private lateinit var mRecyclerView: RecyclerView
-    private lateinit var activity: Activity
-    private lateinit var easyImage: EasyImage
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    companion object {
-        private val REQUEST_READ_EXTERNAL_STORAGE = 2987
-        private val REQUEST_WRITE_EXTERNAL_STORAGE = 7829
-        private val REQUEST_CAMERA_CODE = 100
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val navController = findNavController(R.id.nav_host_fragment)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        binding.fab.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
     }
 
-    val startForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val pos = result.data?.getIntExtra("position", -1)!!
-                val id = result.data?.getIntExtra("id", -1)!!
-                val del_flag = result.data?.getIntExtra("deletion_flag", -1)!!
-                if (pos != -1 && id != -1) {
-                    if (result.resultCode == Activity.RESULT_OK) {
-                        when(del_flag){
-                            -1, 0 -> mAdapter.notifyDataSetChanged()
-                            else -> mAdapter.notifyItemRemoved(pos)
-                        }
-                    }
-                }
-            }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_settings -> true
+            else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp(appBarConfiguration)
+                || super.onSupportNavigateUp()
+    }
 
 
 }
